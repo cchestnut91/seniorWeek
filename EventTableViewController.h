@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  EventTableViewController.h
 //  SeniorWeek2014
 //
 //  Created by Calvin Chestnut on 3/24/14.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SharedEventList.h"
 
-@interface ViewController : UIViewController
+@interface EventTableViewController : UITableViewController
 
 @end
