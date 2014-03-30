@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E05FDD118E89B2A00B553ED /* HelpMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E05FDD018E89B2A00B553ED /* HelpMenuTableViewController.m */; };
+		3E05FDD418E89BF400B553ED /* Help.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E05FDD318E89BF400B553ED /* Help.m */; };
 		3E36D35518E4E19900FE01C3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35418E4E19900FE01C3 /* MapKit.framework */; };
 		3E36D35718E5CCA900FE01C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35618E5CCA900FE01C3 /* AddressBook.framework */; };
 		3E49212B18E30149009D7A25 /* TransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E49212A18E30149009D7A25 /* TransportViewController.m */; };
@@ -57,6 +59,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E05FDCF18E89B2A00B553ED /* HelpMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpMenuTableViewController.h; sourceTree = "<group>"; };
+		3E05FDD018E89B2A00B553ED /* HelpMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpMenuTableViewController.m; sourceTree = "<group>"; };
+		3E05FDD218E89BF400B553ED /* Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Help.h; sourceTree = "<group>"; };
+		3E05FDD318E89BF400B553ED /* Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Help.m; sourceTree = "<group>"; };
 		3E36D35418E4E19900FE01C3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3E36D35618E5CCA900FE01C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3E49212918E30149009D7A25 /* TransportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportViewController.h; sourceTree = "<group>"; };
@@ -184,6 +190,10 @@
 				3EBB9D4F18E1AF77005F4139 /* EventDetailViewController.m */,
 				3E49212918E30149009D7A25 /* TransportViewController.h */,
 				3E49212A18E30149009D7A25 /* TransportViewController.m */,
+				3E05FDCF18E89B2A00B553ED /* HelpMenuTableViewController.h */,
+				3E05FDD018E89B2A00B553ED /* HelpMenuTableViewController.m */,
+				3E05FDD218E89BF400B553ED /* Help.h */,
+				3E05FDD318E89BF400B553ED /* Help.m */,
 				3E8DBEEB18E09BB3001C0658 /* Location.h */,
 				3E8DBEEC18E09BB4001C0658 /* Location.m */,
 				3E8DBEEE18E09E2F001C0658 /* Event.h */,
@@ -353,6 +363,8 @@
 				3E8DBEFB18E0BFFA001C0658 /* SharedEventList.m in Sources */,
 				3EBB9D5018E1AF77005F4139 /* EventDetailViewController.m in Sources */,
 				3E49212B18E30149009D7A25 /* TransportViewController.m in Sources */,
+				3E05FDD118E89B2A00B553ED /* HelpMenuTableViewController.m in Sources */,
+				3E05FDD418E89BF400B553ED /* Help.m in Sources */,
 				3E8DBEF318E0A1A2001C0658 /* EventTableViewController.m in Sources */,
 				3E8DBEF018E09E2F001C0658 /* Event.m in Sources */,
 				3E8DBEF618E0A1C9001C0658 /* EventNavigationViewController.m in Sources */,

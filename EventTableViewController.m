@@ -106,6 +106,10 @@
     return cell;
 }
 
+- (IBAction)openTwitter:(id)sender {
+    
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     EventDetailViewController *detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"eventDetail"];

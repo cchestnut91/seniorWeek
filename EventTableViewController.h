@@ -11,4 +11,8 @@
 
 @interface EventTableViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *menuButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *twitterButton;
+
+
 @end
