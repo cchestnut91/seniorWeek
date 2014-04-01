@@ -38,7 +38,7 @@
     [venueAddressLabel setText:[NSString stringWithFormat:@"%@ - %@", [formatter stringFromDate:[event date]], [formatter stringFromDate:[event end]]]];
     
     table = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStyleGrouped];
-    
+    [table setRowHeight:65.0];
     //table.delegate = self;
     table.dataSource = self;
     
@@ -72,9 +72,12 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat ret;
     if (indexPath.section == 0){
-        return [self heightForText:[event info]];
-    } else if (indexPath.section == 1){
+        return ret = [self heightForText:[event info]];
+    } else
+        /*
+        if (indexPath.section == 1){
         return [self heightForText:[event reqs]] + 35;
     } else if (indexPath.section == 2){
         return [self heightForText:[event food]] + 35;
@@ -84,7 +87,11 @@
         return [self heightForText:[event transport]] + 35;
     } else {
         return [self heightForText:@"Add to Calendar"] + 35;
+    }*/
+    {
+        ret = 80.0;
     }
+    return ret;
 }
 
 -(CGFloat)heightForText:(NSString *)textIn{
