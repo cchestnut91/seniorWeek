@@ -100,7 +100,7 @@
     UITableViewCell *cell;
     if (indexPath.section == 0){
         cell = [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
-        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [[cell.contentView.subviews objectAtIndex:0] setText:[event info]];
     } else if (indexPath.section == 5){
         
@@ -110,6 +110,7 @@
         
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         if (indexPath.section == 1){
             [[cell.contentView.subviews objectAtIndex:0] setText:[event reqs]];
@@ -119,6 +120,7 @@
             [[cell.contentView.subviews objectAtIndex:0] setText:[event alcohol]];
         } else if (indexPath.section == 4) {
             [[cell.contentView.subviews objectAtIndex:0] setText:[event transport]];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
             if (![[event transport] isEqual:@"No Transportation Provided"]){
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
@@ -212,6 +214,33 @@
     
     [eventImage addMotionEffect:group];
 }
+
+- (IBAction)clickShare:(id)sender {
+    
+    NSString *shareString;
+    if ([[event date] timeIntervalSinceNow] < 0.0){
+        if ([[event end] timeIntervalSinceNow] < 0.0){
+            shareString = [NSString stringWithFormat:@"Had a great time at %@! #ICSeniorWeek",[event title]];
+        } else {
+            shareString = [NSString stringWithFormat:@"Having a great time at %@! #ICSeniorWeek",[event title]];
+        }
+    } else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"E. MMM d, h a"];
+        shareString = [NSString stringWithFormat:@"I'll be going to %@. See you there? %@ #ICSeniorWeek",[event title], [formatter stringFromDate:[event date]]];
+    }
+    NSArray *activityItems = [NSArray arrayWithObjects:shareString, nil];
+    
+    UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    
+    [self presentViewController:activityView animated:YES completion:nil];
+    
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

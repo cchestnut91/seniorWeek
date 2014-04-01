@@ -39,7 +39,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.questionArray = [NSArray arrayWithObjects:@"What is Senior Week?", @"Can I bring friends?", @"How do I get into events?", @"How do I get to events?", @"Where do I get a Senior Pass?", @"How much do they cost?", @"How do I pick it up?", @"Question about this app?", nil];
-    self.answerArray = [NSArray arrayWithObjects:@"Senior Week is a week long celebration of your time here at Ithaca College. Plus, it's a great way to spend the time between finals and graduation. Enjoy a variety of events with your friends before steping off campus as an alumni.", @"Anyone with a Senior Pass can get into the events, and some of the events allow for friends without Senior Passes to join, like the Senior Formal or the Senior Splash. The Senior Formal costs $35 for guests.", @"To get into events, just bring your Senior Pass! Some events require some extra stuff, like ID if you want to drink. Check the Events page in this app for details", @"For many events transportation is provided by the Senior Week Comittee. Check the events page for transportation info to see bus info and stop locations.", @"Senior Pass sales open up on at www.icsw2014.com for everyone on Wednesday, April 8th.", @"Senior Week Passes are $110 without a Senior Card, and $55 with a Senior Card. Senior Cards are no longer on sale.", @"Pickup your Pass between 11am and 3pm at Emerson Suites on May 8th or 9th. You can also pick up your Pass at the first event you go to.", @"Email the developer", nil];
+    self.answerArray = [NSArray arrayWithObjects:@"Senior Week is a week long celebration of your time here at Ithaca College. Plus, it's a great way to spend the time between finals and graduation. Enjoy a variety of events with your friends before stepping off campus as an alumni.", @"Anyone with a Senior Pass can get into the events, and some of the events allow for friends without Senior Passes to join, like the Senior Formal or the Senior Splash. The Senior Formal costs $35 for guests.", @"To get into events, just bring your Senior Pass! Some events require some extra stuff, like ID if you want to drink. Check the event details in this app for more information", @"For many events transportation is provided by the Senior Week Comittee. Check the events details for transportation info to see bus stop locations and times.", @"Senior Pass sales open up on at www.icsw2014.com for everyone on Wednesday, April 8th.", @"Senior Week Passes are $110 without a Senior Card, and $55 with a Senior Card. Senior Cards are no longer on sale.", @"Pickup your Pass between 11am and 3pm at Emerson Suites on May 8th or 9th. You can also pick up your Pass at the first event you go to.", @"Email the developer", nil];
     
 }
 
@@ -98,13 +98,14 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == self.questionArray.count - 1){
         if ([MFMailComposeViewController canSendMail]){
             MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
             controller.mailComposeDelegate = self;
             [controller setToRecipients:[NSArray arrayWithObject:@"cchestnut91@gmail.com"]];
             [controller setSubject:@"Senior Week App Help"];
-            [controller setMessageBody:@"Hi there, I am having some trouble with the Senior Week Application. My problem is as follows: \n" isHTML:NO];
+            [controller setMessageBody:@"Hi there, I am having some trouble with the Senior Week Application. My problem is as follows:\n" isHTML:NO];
             if (controller) {
                 [self presentViewController:controller animated:YES completion:nil];
             }
@@ -113,8 +114,6 @@
             [cantMail show];
         }
     }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
