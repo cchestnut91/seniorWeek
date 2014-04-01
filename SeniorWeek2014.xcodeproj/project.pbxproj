@@ -39,9 +39,9 @@
 		3EBB9D5D18E1CB6A005F4139 /* splashImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5618E1CB6A005F4139 /* splashImgA.png */; };
 		3EBB9D5E18E1CB6A005F4139 /* wineTourImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5718E1CB6A005F4139 /* wineTourImgA.png */; };
 		3EBB9D6118E1F9B2005F4139 /* EventList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB9D6018E1F9B2005F4139 /* EventList.m */; };
+		FE65DAAA18EB63BC00E77A85 /* SeniorWeek3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE65DAA918EB63BC00E77A85 /* SeniorWeek3.jpg */; };
 		FEDFF07B18EA440F00C46A9A /* SeniorWeek1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07418EA440F00C46A9A /* SeniorWeek1.jpg */; };
 		FEDFF07C18EA440F00C46A9A /* SeniorWeek2.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07518EA440F00C46A9A /* SeniorWeek2.png */; };
-		FEDFF07D18EA440F00C46A9A /* SeniorWeek3.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07618EA440F00C46A9A /* SeniorWeek3.png */; };
 		FEDFF07E18EA440F00C46A9A /* SeniorWeek4.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07718EA440F00C46A9A /* SeniorWeek4.png */; };
 		FEDFF07F18EA440F00C46A9A /* SeniorWeek5.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07818EA440F00C46A9A /* SeniorWeek5.png */; };
 		FEDFF08018EA440F00C46A9A /* SeniorWeek6.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07918EA440F00C46A9A /* SeniorWeek6.png */; };
@@ -105,9 +105,9 @@
 		3EBB9D5718E1CB6A005F4139 /* wineTourImgA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wineTourImgA.png; sourceTree = "<group>"; };
 		3EBB9D5F18E1F9B2005F4139 /* EventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventList.h; sourceTree = "<group>"; };
 		3EBB9D6018E1F9B2005F4139 /* EventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventList.m; sourceTree = "<group>"; };
+		FE65DAA918EB63BC00E77A85 /* SeniorWeek3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SeniorWeek3.jpg; sourceTree = "<group>"; };
 		FEDFF07418EA440F00C46A9A /* SeniorWeek1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SeniorWeek1.jpg; path = ../SeniorWeek1.jpg; sourceTree = "<group>"; };
 		FEDFF07518EA440F00C46A9A /* SeniorWeek2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek2.png; path = ../SeniorWeek2.png; sourceTree = "<group>"; };
-		FEDFF07618EA440F00C46A9A /* SeniorWeek3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek3.png; path = ../SeniorWeek3.png; sourceTree = "<group>"; };
 		FEDFF07718EA440F00C46A9A /* SeniorWeek4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek4.png; path = ../SeniorWeek4.png; sourceTree = "<group>"; };
 		FEDFF07818EA440F00C46A9A /* SeniorWeek5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek5.png; path = ../SeniorWeek5.png; sourceTree = "<group>"; };
 		FEDFF07918EA440F00C46A9A /* SeniorWeek6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek6.png; path = ../SeniorWeek6.png; sourceTree = "<group>"; };
@@ -199,9 +199,9 @@
 				3E8DBEEE18E09E2F001C0658 /* Event.h */,
 				3E8DBEEF18E09E2F001C0658 /* Event.m */,
 				3E8DBECE18E06D55001C0658 /* Images.xcassets */,
+				FE65DAA918EB63BC00E77A85 /* SeniorWeek3.jpg */,
 				FEDFF07418EA440F00C46A9A /* SeniorWeek1.jpg */,
 				FEDFF07518EA440F00C46A9A /* SeniorWeek2.png */,
-				FEDFF07618EA440F00C46A9A /* SeniorWeek3.png */,
 				FEDFF07718EA440F00C46A9A /* SeniorWeek4.png */,
 				FEDFF07818EA440F00C46A9A /* SeniorWeek5.png */,
 				FEDFF07918EA440F00C46A9A /* SeniorWeek6.png */,
@@ -329,11 +329,11 @@
 				3EBB9D5B18E1CB6A005F4139 /* formalImgA.png in Resources */,
 				FEDFF08018EA440F00C46A9A /* SeniorWeek6.png in Resources */,
 				FEDFF08118EA440F00C46A9A /* SeniorWeek7.png in Resources */,
-				FEDFF07D18EA440F00C46A9A /* SeniorWeek3.png in Resources */,
 				3EBB9D5818E1CB6A005F4139 /* commonsImgA.png in Resources */,
 				3EBB9D5918E1CB6A005F4139 /* drinksOnLakeImgA.png in Resources */,
 				3EBB9D5E18E1CB6A005F4139 /* wineTourImgA.png in Resources */,
 				3EBB9D5D18E1CB6A005F4139 /* splashImgA.png in Resources */,
+				FE65DAAA18EB63BC00E77A85 /* SeniorWeek3.jpg in Resources */,
 				FEDFF07C18EA440F00C46A9A /* SeniorWeek2.png in Resources */,
 				FEDFF07E18EA440F00C46A9A /* SeniorWeek4.png in Resources */,
 				3EBB9D5C18E1CB6A005F4139 /* launchConcertImgA.png in Resources */,
