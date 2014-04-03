@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -79,6 +79,8 @@
     
     //[header.textLabel setTextColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
     [header.textLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
+    [header.textLabel setTextAlignment:NSTextAlignmentLeft];
+    [header.textLabel setFont:[UIFont systemFontOfSize:17]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,16 +94,23 @@
     
     Event *event = [[[[SharedEventList sharedEventList] getList] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[[event bannerImage] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+    
+    UIImageView *background = [[UIImageView alloc] initWithImage:[[event bannerImage] stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+    cell.backgroundView = background;
+    /*
+    [cell.backgroundView setOpaque:NO];
+    [cell.backgroundView setAlpha:0.6];
+    cell.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    */
     [[[[[cell contentView] viewWithTag:0] subviews] objectAtIndex:0] setText:[event title]];
     [[[[[cell contentView] viewWithTag:0] subviews] objectAtIndex:1] setText:[NSString stringWithFormat:@"%@ %@", [[event location] title], [formatter stringFromDate:[event date]]]];
     
     UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    horizontalMotionEffect.minimumRelativeValue = @(-10);
-    horizontalMotionEffect.maximumRelativeValue = @(10);
+    horizontalMotionEffect.minimumRelativeValue = @(-5);
+    horizontalMotionEffect.maximumRelativeValue = @(5);
     UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    verticalMotionEffect.minimumRelativeValue = @(-10);
-    verticalMotionEffect.maximumRelativeValue = @(10);
+    verticalMotionEffect.minimumRelativeValue = @(-5);
+    verticalMotionEffect.maximumRelativeValue = @(5);
     
     UIMotionEffectGroup *group = [UIMotionEffectGroup new];
     group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];

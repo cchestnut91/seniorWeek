@@ -39,10 +39,9 @@
     
     table = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] bounds] style:UITableViewStyleGrouped];
     [table setRowHeight:65.0];
+    [table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //table.delegate = self;
     table.dataSource = self;
-    
-    [table reloadData];
     
     [self.navigationItem setTitle:[event title]];
 }
@@ -71,10 +70,19 @@
     return 1;
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    
+    //[header.textLabel setTextColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
+    [header.textLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat ret;
     if (indexPath.section == 0){
         return ret = [self heightForText:[event info]];
+    } else if (indexPath.section == 5){
+        return [self heightForText:@"Add To Calendar"];
     } else
         /*
         if (indexPath.section == 1){
@@ -114,6 +122,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"detailTextCell"];
         [[cell.contentView.subviews objectAtIndex:0] setText:@"Add to Calendar"];
         [[cell.contentView.subviews objectAtIndex:0] setTextAlignment:NSTextAlignmentCenter];
+        [[cell.contentView.subviews objectAtIndex:0] setTextColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
         
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"detailCell"];
@@ -121,12 +130,16 @@
         
         if (indexPath.section == 1){
             [[cell.contentView.subviews objectAtIndex:0] setText:[event reqs]];
+            [[cell.contentView.subviews objectAtIndex:1] setImage:[UIImage imageNamed:@"Star_Inactive"]];
         } else if (indexPath.section == 2){
             [[cell.contentView.subviews objectAtIndex:0] setText:[event food]];
+            [[cell.contentView.subviews objectAtIndex:1] setImage:[UIImage imageNamed:@"Food_Inactive"]];
         } else if (indexPath.section == 3){
             [[cell.contentView.subviews objectAtIndex:0] setText:[event alcohol]];
+            [[cell.contentView.subviews objectAtIndex:1] setImage:[UIImage imageNamed:@"Drinks_Inactive"]];
         } else if (indexPath.section == 4) {
             [[cell.contentView.subviews objectAtIndex:0] setText:[event transport]];
+            [[cell.contentView.subviews objectAtIndex:1] setImage:[UIImage imageNamed:@"Bus_Inactive"]];
             [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
             if (![[event transport] isEqual:@"No Transportation Provided"]){
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
