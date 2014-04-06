@@ -24,6 +24,9 @@
 		3E05FED618EDD5AD00B553ED /* Food_Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E05FECE18EDD5AD00B553ED /* Food_Inactive.png */; };
 		3E05FED718EDD5AD00B553ED /* Star_Active.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E05FECF18EDD5AD00B553ED /* Star_Active.png */; };
 		3E05FED818EDD5AD00B553ED /* Star_Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E05FED018EDD5AD00B553ED /* Star_Inactive.png */; };
+		3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24FF3318EF16ED004A3DBC /* SerialGATT.m */; };
+		3E24FF3718EF22FC004A3DBC /* PromoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24FF3618EF22FC004A3DBC /* PromoViewController.m */; };
+		3E24FF3918EF2492004A3DBC /* bandwagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E24FF3818EF2492004A3DBC /* bandwagon.png */; };
 		3E36D35518E4E19900FE01C3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35418E4E19900FE01C3 /* MapKit.framework */; };
 		3E36D35718E5CCA900FE01C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35618E5CCA900FE01C3 /* AddressBook.framework */; };
 		3E49212B18E30149009D7A25 /* TransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E49212A18E30149009D7A25 /* TransportViewController.m */; };
@@ -93,6 +96,11 @@
 		3E05FECE18EDD5AD00B553ED /* Food_Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Food_Inactive.png; sourceTree = "<group>"; };
 		3E05FECF18EDD5AD00B553ED /* Star_Active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_Active.png; sourceTree = "<group>"; };
 		3E05FED018EDD5AD00B553ED /* Star_Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_Inactive.png; sourceTree = "<group>"; };
+		3E24FF3218EF16ED004A3DBC /* SerialGATT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialGATT.h; sourceTree = "<group>"; };
+		3E24FF3318EF16ED004A3DBC /* SerialGATT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialGATT.m; sourceTree = "<group>"; };
+		3E24FF3518EF22FC004A3DBC /* PromoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoViewController.h; sourceTree = "<group>"; };
+		3E24FF3618EF22FC004A3DBC /* PromoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromoViewController.m; sourceTree = "<group>"; };
+		3E24FF3818EF2492004A3DBC /* bandwagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandwagon.png; sourceTree = "<group>"; };
 		3E36D35418E4E19900FE01C3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3E36D35618E5CCA900FE01C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3E49212918E30149009D7A25 /* TransportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportViewController.h; sourceTree = "<group>"; };
@@ -214,6 +222,10 @@
 				3EBB9D6018E1F9B2005F4139 /* EventList.m */,
 				3E8DBEF918E0BFFA001C0658 /* SharedEventList.h */,
 				3E8DBEFA18E0BFFA001C0658 /* SharedEventList.m */,
+				3E24FF3218EF16ED004A3DBC /* SerialGATT.h */,
+				3E24FF3318EF16ED004A3DBC /* SerialGATT.m */,
+				3E24FF3518EF22FC004A3DBC /* PromoViewController.h */,
+				3E24FF3618EF22FC004A3DBC /* PromoViewController.m */,
 				3E8DBEF118E0A1A2001C0658 /* EventTableViewController.h */,
 				3E8DBEF218E0A1A2001C0658 /* EventTableViewController.m */,
 				3EBB9D4E18E1AF77005F4139 /* EventDetailViewController.h */,
@@ -229,6 +241,7 @@
 				3E8DBEEE18E09E2F001C0658 /* Event.h */,
 				3E8DBEEF18E09E2F001C0658 /* Event.m */,
 				3E8DBECE18E06D55001C0658 /* Images.xcassets */,
+				3E24FF3818EF2492004A3DBC /* bandwagon.png */,
 				3E05FEC918EDD5AD00B553ED /* Bus_Active.png */,
 				3E05FECA18EDD5AD00B553ED /* Bus_Inactive.png */,
 				3E05FECB18EDD5AD00B553ED /* Drinks_Active.png */,
@@ -376,6 +389,7 @@
 				3EBB9D5B18E1CB6A005F4139 /* formalImgA.png in Resources */,
 				FEDFF08018EA440F00C46A9A /* SeniorWeek6.png in Resources */,
 				FEDFF08118EA440F00C46A9A /* SeniorWeek7.png in Resources */,
+				3E24FF3918EF2492004A3DBC /* bandwagon.png in Resources */,
 				3E05FED718EDD5AD00B553ED /* Star_Active.png in Resources */,
 				3EBB9D5818E1CB6A005F4139 /* commonsImgA.png in Resources */,
 				3EBB9D5918E1CB6A005F4139 /* drinksOnLakeImgA.png in Resources */,
@@ -418,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E24FF3718EF22FC004A3DBC /* PromoViewController.m in Sources */,
 				3E8DBEC718E06D55001C0658 /* AppDelegate.m in Sources */,
 				3EBB9D6118E1F9B2005F4139 /* EventList.m in Sources */,
 				3E8DBEFB18E0BFFA001C0658 /* SharedEventList.m in Sources */,
@@ -430,6 +445,7 @@
 				3E8DBEF618E0A1C9001C0658 /* EventNavigationViewController.m in Sources */,
 				3E8DBEED18E09BB4001C0658 /* Location.m in Sources */,
 				3E8DBEC318E06D55001C0658 /* main.m in Sources */,
+				3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

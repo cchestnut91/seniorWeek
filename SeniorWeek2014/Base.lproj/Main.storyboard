@@ -57,9 +57,15 @@
                                 <segue destination="7k9-8h-VEB" kind="push" id="36T-93-rFE"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Promo" id="ssJ-4I-Gbk">
+                            <connections>
+                                <action selector="clickPromo:" destination="EP4-E9-xVT" id="HF8-wI-x25"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="menuButton" destination="EfW-nn-Kdp" id="h3N-OP-EW1"/>
+                        <outlet property="promoButton" destination="ssJ-4I-Gbk" id="THi-fW-pqB"/>
                         <segue destination="Ye7-Ln-gan" kind="push" identifier="openDetail" id="zcm-u6-Kid"/>
                     </connections>
                 </tableViewController>
@@ -107,6 +113,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Itf-J9-asi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="509" y="209"/>
+        </scene>
+        <!--Promo View Controller-->
+        <scene sceneID="X0g-7f-tjj">
+            <objects>
+                <viewController storyboardIdentifier="promoVC" id="9xR-ng-DZM" customClass="PromoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6yJ-RD-UqB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="KUl-Wx-bni">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="313"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" id="Tzc-Vz-Oru">
+                                <rect key="frame" x="20" y="351" width="280" height="197"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Le-Iw-yz6">
+                                <rect key="frame" x="20" y="226" width="280" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="-1" height="-1"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="promoImage" destination="KUl-Wx-bni" id="03e-1R-SlD"/>
+                        <outlet property="promoText" destination="Tzc-Vz-Oru" id="cur-Yj-gt6"/>
+                        <outlet property="promoTitle" destination="3Le-Iw-yz6" id="oeQ-fs-gxd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKU-95-GUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-26" y="577"/>
         </scene>
         <!--Transport View Controller-->
         <scene sceneID="g3A-C9-nsu">

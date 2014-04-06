@@ -8,6 +8,7 @@
 
 #import "EventTableViewController.h"
 #import "EventDetailViewController.h"
+#import "PromoViewController.h"
 
 @interface EventTableViewController ()
 
@@ -24,9 +25,35 @@
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.found = NO;
+    
+    [self.promoButton setEnabled:NO];
+    
+    _beaconUUID = @"DE6D8667-45F7-41FF-8295-1850F010AAE0";
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self initRegion];
+    [self locationManager:self.locationManager didStartMonitoringForRegion:self.beaconRegion];
+    
+    self.sensor.delegate = self;
+    _sensor = [[SerialGATT alloc] init];
+    [_sensor setup];
+    _sensor.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(found:)
+                                                 name:@"found"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(lost:)
+                                                 name:@"lost"
+                                               object:nil];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
@@ -42,6 +69,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)clickPromo:(id)sender {
+    if ([sender isEnabled]){
+        PromoViewController *promo = [self.storyboard instantiateViewControllerWithIdentifier:@"promoVC"];
+        [self.navigationController pushViewController:promo animated:YES];
+    } else {
+        UIAlertView *noPromo = [[UIAlertView alloc] initWithTitle:@"No Promo Available" message:@"Enjoy Senior Week! We'll let you know if you're near any promotions" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [noPromo show];
+    }
 }
 
 #pragma mark - Table view data source
@@ -135,6 +172,65 @@
     [self.navigationController pushViewController:detailView animated:YES];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark iBeacons
+
+- (void)initRegion {
+    //NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"]; // ORIGINAL
+    
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:_beaconUUID];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"my_iBeacon"];
+    [self.locationManager startMonitoringForRegion:_beaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+}
+
+-(void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+    if ([self.promoButton isEnabled]){
+        [self.promoButton setEnabled:NO];
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"lost" object:self userInfo:nil];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+    CLBeacon *beacon = [[CLBeacon alloc] init];
+    beacon = [beacons lastObject];
+    
+    if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
+        if (![self.promoButton isEnabled]){
+            [self.promoButton setEnabled:YES];
+        }
+        if (!self.found){
+            self.found = YES;
+            NSDictionary *dataDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Enjoy some Bandwagon fries", @"There's nothing like an order of Bandwagon fries, so go enjoy some later on today, and display this message for a $1 discount!", nil] forKeys:[NSArray arrayWithObjects:@"title", @"message", nil]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"found" object:self userInfo:dataDict];
+        }
+    }
+}
+
+- (void)found: (NSNotification *)note {
+    NSDictionary *theData = [note userInfo];
+    
+    PromoViewController *promo = [self.storyboard instantiateViewControllerWithIdentifier:@"promoVC"];
+    promo.promoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandwagon"]];
+    promo.promoTitle = [theData objectForKey:@"title"];
+    promo.promoText = [theData objectForKey:@"message"];
+    
+    [self.navigationController pushViewController:promo animated:YES];
+;
+    
+}
+
+-(void) lost: (NSNotification *)note{
 }
 
 /*
