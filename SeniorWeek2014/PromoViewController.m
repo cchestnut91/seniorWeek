@@ -27,11 +27,12 @@
 {
     [super viewDidLoad];
     //Get rid of this and fix the bug!
+    /*
     [_promoImage setImage:[UIImage imageNamed:@"bandwagon"]];   
     [_promoText setText:@"There's nothing like an order of Bandwagon fries, so go enjoy some later on today and display this message for a $1 discount!"];
     [_promoText setTextAlignment:NSTextAlignmentLeft];
     [_promoTitle setText:@"Enjoy some Bandwagon Fries"];
-    
+    */
     // Do any additional setup after loading the view.
 }
 

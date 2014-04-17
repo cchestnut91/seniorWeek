@@ -10,20 +10,24 @@
 #import "sharedEventList.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SerialGATT.h"
+#import "PromoViewController.h"
 
 #define RSSI_THRESHOLD -60  // boundry signal strength
 
 @class CBPeripheral;
 @class SerialGATT;
 
-@interface EventTableViewController : UITableViewController <CLLocationManagerDelegate, BTSmartSensorDelegate>;
+@interface EventTableViewController : UITableViewController <CLLocationManagerDelegate, BTSmartSensorDelegate>{
+};
 
+@property (strong, nonatomic) PromoViewController *promoView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *menuButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *promoButton;
 @property (strong, nonatomic) NSString *beaconUUID;
-@property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSMutableDictionary *beacons;
 @property BOOL found;
+@property (strong, nonatomic) NSString *archivePath;
 
 @property (strong, nonatomic) SerialGATT *sensor;
 
