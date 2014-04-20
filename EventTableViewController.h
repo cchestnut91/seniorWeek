@@ -17,6 +17,7 @@
 @class SerialGATT;
 
 @interface EventTableViewController : UITableViewController <CLLocationManagerDelegate, BTSmartSensorDelegate>{
+    NSMutableDictionary *beaconDict;
 };
 
 /**

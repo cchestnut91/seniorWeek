@@ -61,6 +61,7 @@
 		3EBB9D5D18E1CB6A005F4139 /* splashImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5618E1CB6A005F4139 /* splashImgA.png */; };
 		3EBB9D5E18E1CB6A005F4139 /* wineTourImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5718E1CB6A005F4139 /* wineTourImgA.png */; };
 		3EBB9D6118E1F9B2005F4139 /* EventList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB9D6018E1F9B2005F4139 /* EventList.m */; };
+		49E6D51F19044FA7003DC39C /* PBiBeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E6D51E19044FA7003DC39C /* PBiBeaconManager.m */; };
 		FE65DAAA18EB63BC00E77A85 /* SeniorWeek3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FE65DAA918EB63BC00E77A85 /* SeniorWeek3.jpg */; };
 		FEDFF07B18EA440F00C46A9A /* SeniorWeek1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07418EA440F00C46A9A /* SeniorWeek1.jpg */; };
 		FEDFF07C18EA440F00C46A9A /* SeniorWeek2.png in Resources */ = {isa = PBXBuildFile; fileRef = FEDFF07518EA440F00C46A9A /* SeniorWeek2.png */; };
@@ -156,6 +157,8 @@
 		3EBB9D5718E1CB6A005F4139 /* wineTourImgA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wineTourImgA.png; sourceTree = "<group>"; };
 		3EBB9D5F18E1F9B2005F4139 /* EventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventList.h; sourceTree = "<group>"; };
 		3EBB9D6018E1F9B2005F4139 /* EventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventList.m; sourceTree = "<group>"; };
+		49E6D51D19044FA7003DC39C /* PBiBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBiBeaconManager.h; sourceTree = "<group>"; };
+		49E6D51E19044FA7003DC39C /* PBiBeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBiBeaconManager.m; sourceTree = "<group>"; };
 		FE65DAA918EB63BC00E77A85 /* SeniorWeek3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SeniorWeek3.jpg; sourceTree = "<group>"; };
 		FEDFF07418EA440F00C46A9A /* SeniorWeek1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SeniorWeek1.jpg; path = ../SeniorWeek1.jpg; sourceTree = "<group>"; };
 		FEDFF07518EA440F00C46A9A /* SeniorWeek2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeniorWeek2.png; path = ../SeniorWeek2.png; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				3E24FF3618EF22FC004A3DBC /* PromoViewController.m */,
 				3E3CE94718FDA452001FB0D1 /* TimeInBeacon.h */,
 				3E3CE94818FDA453001FB0D1 /* TimeInBeacon.m */,
+				49E6D51D19044FA7003DC39C /* PBiBeaconManager.h */,
+				49E6D51E19044FA7003DC39C /* PBiBeaconManager.m */,
 				3E3CE94418FD628C001FB0D1 /* Beacon.h */,
 				3E3CE94518FD628C001FB0D1 /* Beacon.m */,
 				3E8DBEF118E0A1A2001C0658 /* EventTableViewController.h */,
@@ -472,6 +477,7 @@
 				3E8DBEC318E06D55001C0658 /* main.m in Sources */,
 				3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */,
 				3EA9109B1903FE1A00133B45 /* PromoTableViewController.m in Sources */,
+				49E6D51F19044FA7003DC39C /* PBiBeaconManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

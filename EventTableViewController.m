@@ -7,14 +7,14 @@
 
 #import "EventTableViewController.h"
 #import "EventDetailViewController.h"
+#import "PBiBeaconManager.h"
 #import "Beacon.h"
 
 @interface EventTableViewController ()
 
 @end
 
-@implementation EventTableViewController
-
+@implementation EventTableViewController\
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -104,12 +104,10 @@
     /*
      Beacons should be created here from JSON
     */
-    Beacon *a = [[Beacon alloc] initWithIdent:@"beaconA" andUUID:[[NSUUID alloc] initWithUUIDString:@"8492E75F-4FD6-469D-B132-043FE94921D8"] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:@"$1 Off Bandwagon Fries" andMessage:@"There's nothing quite like a plate of Bandwagon Fries, so get off your feet and treat yourself to a plate!" andTrack:NO andOnce:NO];
-    Beacon *b = [[Beacon alloc] initWithIdent:@"beaconB" andUUID:[[NSUUID alloc] initWithUUIDString:@"DE6D8667-45F7-41FF-8295-1850F010AAE0"] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:@"Free song from DJ Whatever!" andMessage:@"Enjoy DJ Whatever's performance? Download his latest mix exclusively from here to hear some more!" andTrack:YES andOnce:NO];
     
-    //key in beacon disctionary is the beacon identifier
-    [self.beacons setObject:a forKey:[a ident]];
-    [self.beacons setObject:b forKey:[b ident]];
+    
+    PBiBeaconManager *myiBeaconManager = [[PBiBeaconManager alloc] initWithIdent:@"senior_week"];
+    _beacons = myiBeaconManager.beacons;
     
     [self initRegions];
 }
@@ -365,6 +363,7 @@
     for (int i = 0; i < beacons.count; i++){
         CLBeacon *beacon = [beacons objectAtIndex:i];
         
+        NSLog(@"fired");
         //This should become if (beacon.proximity > [[self.beacons objectForKey:[region identifier]] threshold]), but first Beacons need a default threshold
         if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
             if ([[self.beacons objectForKey:[region identifier]] promo]){

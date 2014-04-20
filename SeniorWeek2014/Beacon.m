@@ -238,7 +238,7 @@
  * @return void
  */
 -(void) track:(NSInteger)rssi{
-    [[[self.encounters objectAtIndex:0] distArray] addObject:[NSString stringWithFormat:@"%d", rssi]];
+    [[[self.encounters objectAtIndex:0] distArray] addObject:[NSString stringWithFormat:@"%ld", (long)rssi]];
 }
 
 
