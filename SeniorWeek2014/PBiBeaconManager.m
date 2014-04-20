@@ -53,9 +53,6 @@ static PBiBeaconManager *sharedPBiBeaconManager = nil;
             for ( NSDictionary *serialData in data )
             {
                 if ([serialData[@"cur_app_id"] isEqual:app_id]) {   //&&[serialData[@"method_id"]isEqual:@"FOUNDER"]
-                    NSLog(@"fired");
-                    
-                    
                     beacon = [[Beacon alloc] initWithIdent:@"beaconA" andUUID:[[NSUUID alloc] initWithUUIDString:[NSString stringWithFormat:@"%@", serialData[@"UUID"]]] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:[NSString stringWithFormat:@"%@", serialData[@"beacon_message"]] andMessage:[NSString stringWithFormat:@"%@", serialData[@"beacon_message_meta"]] andTrack:NO andOnce:NO];
 
                     NSLog(@"%d %@",i,beacon.uuid);
