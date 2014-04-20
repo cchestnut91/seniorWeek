@@ -10,6 +10,15 @@
 
 @implementation TimeInBeacon
 
+/**
+ * init.
+ * Description: Default init sets enter property and initializes distArray \n
+ * Properties Modified: TimeInBeacon object created \n
+ * Preconditions: none \n
+ * Post conditions: TimeInBeacon object created \n
+ * @author Calvin Chestnut
+ * @return TimeInBeacon object
+ */
 -(id)init{
     self = [super init];
     
@@ -19,12 +28,32 @@
     return self;
 }
 
+/**
+ * encodeWithCoder.
+ * Description: Allows Object and properties to be saved as NSData \n
+ * Properties Modified: TimeInBeacon object properties encoded by NSCoder \n
+ * Preconditions: none \n
+ * Post conditions: TimeInBeacon object encoded by NSCoder \n
+ * @author Calvin Chestnut
+ * @param aCoder NSCoder compiling object into NSData
+ * @return void
+ */
 -(void) encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.enter forKey:@"enter"];
     [aCoder encodeObject:self.exit forKey:@"exit"];
     [aCoder encodeObject:self.distArray forKey:@"rssi"];
 }
 
+/**
+ * initWithCoder.
+ * Description: Creates TimeInBeacon object from NSData with given NSCoder \n
+ * Properties Modified: TimeInBeacon object created \n
+ * Preconditions: NSData with TimeInBeacon object has been saved \n
+ * Post conditions: TimeInBeacon object created by NSCoder \n
+ * @author Calvin Chestnut
+ * @param aDecoder NSCoder compiling object from NSData
+ * @return TimeInBeacon object
+ */
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     

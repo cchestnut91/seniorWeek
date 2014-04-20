@@ -57,9 +57,10 @@
                                 <segue destination="7k9-8h-VEB" kind="push" id="36T-93-rFE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Promo" id="ssJ-4I-Gbk">
+                        <barButtonItem key="rightBarButtonItem" title="Promos" id="ssJ-4I-Gbk">
                             <connections>
                                 <action selector="clickPromo:" destination="EP4-E9-xVT" id="HF8-wI-x25"/>
+                                <segue destination="RvH-rJ-dqA" kind="push" identifier="promosSegue" id="6rD-Gp-I2S"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -114,6 +115,52 @@
             </objects>
             <point key="canvasLocation" x="509" y="209"/>
         </scene>
+        <!--Promo Table View Controller-->
+        <scene sceneID="TUZ-rP-im0">
+            <objects>
+                <tableViewController id="RvH-rJ-dqA" customClass="PromoTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="UaV-IJ-rC9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="promoCell" rowHeight="60" id="hCZ-ou-WkU" customClass="PromoTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hCZ-ou-WkU" id="M1Z-eq-zjU">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VDW-mz-cgn">
+                                            <rect key="frame" x="20" y="5" width="247" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <size key="shadowOffset" width="-1" height="-1"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="VDW-mz-cgn" id="Lf8-nB-Lsx"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RvH-rJ-dqA" id="TXI-dk-pp4"/>
+                            <outlet property="delegate" destination="RvH-rJ-dqA" id="TZ5-Ra-aak"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="RqF-hN-53S"/>
+                    <connections>
+                        <segue destination="9xR-ng-DZM" kind="push" identifier="openDetail" id="ax4-zk-m1n"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRF-qS-kPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="505" y="910"/>
+        </scene>
         <!--Promo View Controller-->
         <scene sceneID="X0g-7f-tjj">
             <objects>
@@ -146,6 +193,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="hQV-W1-WHT"/>
                     <connections>
                         <outlet property="promoImage" destination="KUl-Wx-bni" id="03e-1R-SlD"/>
                         <outlet property="promoText" destination="Tzc-Vz-Oru" id="cur-Yj-gt6"/>
@@ -154,7 +202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKU-95-GUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="989" y="809"/>
+            <point key="canvasLocation" x="947" y="910"/>
         </scene>
         <!--Transport View Controller-->
         <scene sceneID="g3A-C9-nsu">

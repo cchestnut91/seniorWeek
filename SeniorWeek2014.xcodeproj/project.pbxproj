@@ -50,6 +50,8 @@
 		3E8DBEF318E0A1A2001C0658 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DBEF218E0A1A2001C0658 /* EventTableViewController.m */; };
 		3E8DBEF618E0A1C9001C0658 /* EventNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DBEF518E0A1C9001C0658 /* EventNavigationViewController.m */; };
 		3E8DBEFB18E0BFFA001C0658 /* SharedEventList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8DBEFA18E0BFFA001C0658 /* SharedEventList.m */; };
+		3EA910981903757100133B45 /* PromoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA910971903757100133B45 /* PromoTableViewCell.m */; };
+		3EA9109B1903FE1A00133B45 /* PromoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9109A1903FE1A00133B45 /* PromoTableViewController.m */; };
 		3EBB9D5018E1AF77005F4139 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB9D4F18E1AF77005F4139 /* EventDetailViewController.m */; };
 		3EBB9D5818E1CB6A005F4139 /* commonsImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5118E1CB6A005F4139 /* commonsImgA.png */; };
 		3EBB9D5918E1CB6A005F4139 /* drinksOnLakeImgA.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB9D5218E1CB6A005F4139 /* drinksOnLakeImgA.png */; };
@@ -139,6 +141,10 @@
 		3E8DBEF518E0A1C9001C0658 /* EventNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventNavigationViewController.m; sourceTree = "<group>"; };
 		3E8DBEF918E0BFFA001C0658 /* SharedEventList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedEventList.h; sourceTree = "<group>"; };
 		3E8DBEFA18E0BFFA001C0658 /* SharedEventList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedEventList.m; sourceTree = "<group>"; };
+		3EA910961903757100133B45 /* PromoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoTableViewCell.h; sourceTree = "<group>"; };
+		3EA910971903757100133B45 /* PromoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromoTableViewCell.m; sourceTree = "<group>"; };
+		3EA910991903FE1A00133B45 /* PromoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoTableViewController.h; sourceTree = "<group>"; };
+		3EA9109A1903FE1A00133B45 /* PromoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromoTableViewController.m; sourceTree = "<group>"; };
 		3EBB9D4E18E1AF77005F4139 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		3EBB9D4F18E1AF77005F4139 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		3EBB9D5118E1CB6A005F4139 /* commonsImgA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commonsImgA.png; sourceTree = "<group>"; };
@@ -224,6 +230,10 @@
 				3E8DBEC518E06D55001C0658 /* AppDelegate.h */,
 				3E8DBEC618E06D55001C0658 /* AppDelegate.m */,
 				3E8DBEC818E06D55001C0658 /* Main.storyboard */,
+				3EA910961903757100133B45 /* PromoTableViewCell.h */,
+				3EA910971903757100133B45 /* PromoTableViewCell.m */,
+				3EA910991903FE1A00133B45 /* PromoTableViewController.h */,
+				3EA9109A1903FE1A00133B45 /* PromoTableViewController.m */,
 				3E8DBEF418E0A1C9001C0658 /* EventNavigationViewController.h */,
 				3E8DBEF518E0A1C9001C0658 /* EventNavigationViewController.m */,
 				3EBB9D5F18E1F9B2005F4139 /* EventList.h */,
@@ -457,9 +467,11 @@
 				3E8DBEF018E09E2F001C0658 /* Event.m in Sources */,
 				3E8DBEF618E0A1C9001C0658 /* EventNavigationViewController.m in Sources */,
 				3E8DBEED18E09BB4001C0658 /* Location.m in Sources */,
+				3EA910981903757100133B45 /* PromoTableViewCell.m in Sources */,
 				3E3CE94618FD628C001FB0D1 /* Beacon.m in Sources */,
 				3E8DBEC318E06D55001C0658 /* main.m in Sources */,
 				3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */,
+				3EA9109B1903FE1A00133B45 /* PromoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

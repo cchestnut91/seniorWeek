@@ -1,16 +1,29 @@
-//
-//  Beacon.m
-//  SeniorWeek2014
-//
-//  Created by Calvin Chestnut on 4/15/14.
-//  Copyright (c) 2014 Calvin Chestnut. All rights reserved.
-//
+/**
+ *  Beacon.
+ *  Description: Beacon class which contains information about what a Beacon is, what it should do, and what it should say.
+ *  @author Calvin Chestnut
+ *
+ */
 
 #import "Beacon.h"
 #import "TimeInBeacon.h"
 
 @implementation Beacon
 
+/**
+ * initWithIdent andUUID andMajor andMinor andTrack.
+ * Description: Base Beacon init with everything required to create a Beacon and start ranging \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: All necessary parameters are supplied \n
+ * Post conditions: Beacon object returned \n
+ * @author Calvin Chestnut
+ * @param identIn NSString with identifier
+ * @param uuidIn NSUUID for Beacon
+ * @param majorIn NSInteger with Major Key for Beacon
+ * @param minorIn NSInteger with Minor Key for Beacon
+ * @param trackIn BOOL determining if rssi should be tracked while User is within region
+ * @return New Beacon object
+ */
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)majorIn andMinor:(NSInteger)minorIn andTrack:(BOOL)trackIn;{
     self = [super init];
     self.ident = identIn;
@@ -24,40 +37,123 @@
     return self;
 }
 
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTrack:(BOOL)trackIn;{
+/**
+ * initWithIdent andUUID andMajor andMinor andPromo andTitle andMessage andTrack andOnce.
+ * Description: Base Beacon init with everything required to create a Beacon and start ranging, plus extras \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: All necessary parameters are supplied \n
+ * Post conditions: Beacon object returned \n
+ * @author Calvin Chestnut
+ * @param identIn NSString with identifier
+ * @param uuidIn NSUUID for Beacon
+ * @param majorIn NSInteger with Major Key for Beacon
+ * @param minorIn NSInteger with Minor Key for Beacon
+ * @param trackIn BOOL determining if rssi should be tracked while User is within region
+ * @param promoIn BOOL determins if Beacon contains a promotion
+ * @param titleIn NSString containing promotion title
+ * @param messageIn NSString containing promotion message
+ * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
+ * @return New Beacon object
+ */
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andTrack:trackIn];
     self.promo = promoIn;
-    
-    return self;
-}
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andTrack:(BOOL)trackIn;{
-    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTrack:trackIn];
+    self.once = onceIn;
     self.title = titleIn;
     self.message = messageIn;
     
     return self;
 }
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn;{
-    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn];
+
+/**
+ * initWithIdent andUUID andMajor andMinor andPromo andTitle andMessage andThreshold andTrack andOnce.
+ * Description: Base Beacon init with everything required to create a Beacon and start ranging, plus extras \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: All necessary parameters are supplied \n
+ * Post conditions: Beacon object returned \n
+ * @author Calvin Chestnut
+ * @param identIn NSString with identifier
+ * @param uuidIn NSUUID for Beacon
+ * @param majorIn NSInteger with Major Key for Beacon
+ * @param minorIn NSInteger with Minor Key for Beacon
+ * @param trackIn BOOL determining if rssi should be tracked while User is within region
+ * @param promoIn BOOL determins if Beacon contains a promotion
+ * @param titleIn NSString containing promotion title
+ * @param messageIn NSString containing promotion message
+ * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
+ * @param thresholdIn CGFloat containing threshold for Beacon's within determination
+ * @return New Beacon object
+ */
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn andOnce:onceIn];
     self.threshold = thresholdIn;
     
     return self;
 }
 
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn;{
-    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn];
+/**
+ * initWithIdent andUUID andMajor andMinor andPromo andTitle andMessage andMedia andTrack andOnce.
+ * Description: Base Beacon init with everything required to create a Beacon and start ranging, plus extras \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: All necessary parameters are supplied \n
+ * Post conditions: Beacon object returned \n
+ * @author Calvin Chestnut
+ * @param identIn NSString with identifier
+ * @param uuidIn NSUUID for Beacon
+ * @param majorIn NSInteger with Major Key for Beacon
+ * @param minorIn NSInteger with Minor Key for Beacon
+ * @param trackIn BOOL determining if rssi should be tracked while User is within region
+ * @param promoIn BOOL determins if Beacon contains a promotion
+ * @param titleIn NSString containing promotion title
+ * @param messageIn NSString containing promotion message
+ * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
+ * @param mediaIn NSData containing media to be displayed with Promotion
+ * @return New Beacon object
+ */
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn andOnce:onceIn];
     self.media = mediaIn;
     
     return self;
 }
 
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn;{
-    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andThreshold:thresholdIn andTrack:trackIn];
+/**
+ * initWithIdent andUUID andMajor andMinor andPromo andTitle andMessage andThreshold andMedia andTrack andOnce.
+ * Description: Base Beacon init with everything required to create a Beacon and start ranging, plus extras \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: All necessary parameters are supplied \n
+ * Post conditions: Beacon object returned \n
+ * @author Calvin Chestnut
+ * @param identIn NSString with identifier
+ * @param uuidIn NSUUID for Beacon
+ * @param majorIn NSInteger with Major Key for Beacon
+ * @param minorIn NSInteger with Minor Key for Beacon
+ * @param trackIn BOOL determining if rssi should be tracked while User is within region
+ * @param promoIn BOOL determins if Beacon contains a promotion
+ * @param titleIn NSString containing promotion title
+ * @param messageIn NSString containing promotion message
+ * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
+ * @param thresholdIn CGFloat containing threshold for Beacon's within determination
+ * @param mediaIn NSData containing media to be displayed with promotion
+ * @return New Beacon object
+ */
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+    self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andThreshold:thresholdIn andTrack:trackIn andOnce:onceIn];
     self.media = mediaIn;
     
     return self;
 }
 
+/**
+ * encodeWithCoder.
+ * Description: Allows Object and properties to be saved as NSData \n
+ * Properties Modified: Beacon object properties encoded by NSCoder \n
+ * Preconditions: none \n
+ * Post conditions: Beacon object encoded by NSCoder \n
+ * @author Calvin Chestnut
+ * @param aCoder NSCoder compiling object into NSData
+ * @return void
+ */
 -(void) encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.ident forKey:@"ident"];
     [aCoder encodeBool:self.promo forKey:@"promo"];
@@ -73,9 +169,18 @@
     [aCoder encodeObject:self.region forKey:@"region"];
     [aCoder encodeInteger:(self.minor) forKey:@"minor"];
     [aCoder encodeInteger:(self.major) forKey:@"major"];
-    
 }
 
+/**
+ * initWithCoder.
+ * Description: Creates Beacon object from NSData with given NSCoder \n
+ * Properties Modified: Beacon object created \n
+ * Preconditions: NSData with Beacon object has been saved \n
+ * Post conditions: Beacon object created by NSCoder \n
+ * @author Calvin Chestnut
+ * @param aDecoder NSCoder compiling object from NSData
+ * @return Beacon object
+ */
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     self.ident = [aDecoder decodeObjectForKey:@"ident"];
@@ -96,14 +201,42 @@
     return self;
 }
 
+/**
+ * enter.
+ * Description: Marks that user has entered the given region \n
+ * Properties Modified: encounters \n
+ * Preconditions: encounters initialized \n
+ * Post conditions: New instance of TimeInBeacon put into encounters \n
+ * @author Calvin Chestnut
+ * @return void
+ */
 -(void)enter{
     [self.encounters insertObject:[[TimeInBeacon alloc] init] atIndex:0];
 }
 
+/**
+ * exit.
+ * Description: Marks that user has left the given region \n
+ * Properties Modified: encounters \n
+ * Preconditions: encounters and object at 0 index has been entered by not exited \n
+ * Post conditions: TimeInBeacon object exit time set \n
+ * @author Calvin Chestnut
+ * @return void
+ */
 -(void)exit{
     [[self.encounters objectAtIndex:0] setExit:[[NSDate alloc] init]];
 }
 
+/**
+ * track.
+ * Description: Marks user's distance from beacon in TimeInRegion object within encounters \n
+ * Properties Modified: encounters \n
+ * Preconditions: TimeInBeacon at position 0 has been entered but not exited initialized \n
+ * Post conditions: distance from beacon saved in NSArray \n
+ * @author Calvin Chestnut
+ * @param rssi NSInteger containing rssi from Beacon to device
+ * @return void
+ */
 -(void) track:(NSInteger)rssi{
     [[[self.encounters objectAtIndex:0] distArray] addObject:[NSString stringWithFormat:@"%d", rssi]];
 }
