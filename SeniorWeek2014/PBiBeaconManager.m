@@ -28,7 +28,7 @@ static PBiBeaconManager *sharedPBiBeaconManager = nil;
     return [self sharedCenter];
 }
 
--(id)initWithIdent:(NSString *)app_id_in{
+-(id)initWithIdent:(NSString *)app_id_in andManager:(CLLocationManager *)managerIn{
     if((self = [super init])){
         app_id = app_id_in;
         NSData *beaconData = [[NSData alloc] initWithContentsOfURL:
@@ -53,7 +53,8 @@ static PBiBeaconManager *sharedPBiBeaconManager = nil;
             for ( NSDictionary *serialData in data )
             {
                 if ([serialData[@"cur_app_id"] isEqual:app_id]) {   //&&[serialData[@"method_id"]isEqual:@"FOUNDER"]
-                    beacon = [[Beacon alloc] initWithIdent:@"beaconA" andUUID:[[NSUUID alloc] initWithUUIDString:[NSString stringWithFormat:@"%@", serialData[@"UUID"]]] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:[NSString stringWithFormat:@"%@", serialData[@"beacon_message"]] andMessage:[NSString stringWithFormat:@"%@", serialData[@"beacon_message_meta"]] andTrack:NO andOnce:NO];
+                    beacon = [[Beacon alloc] initWithIdent:[NSString stringWithFormat:@"%@", serialData[@"ident"]] andUUID:[[NSUUID alloc] initWithUUIDString:[NSString stringWithFormat:@"%@", serialData[@"UUID"]]] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:[NSString stringWithFormat:@"%@", serialData[@"beacon_message"]] andMessage:[NSString stringWithFormat:@"%@", serialData[@"beacon_message_meta"]] andTrack:NO andOnce:NO];
+                    [beacon startManager:managerIn];
 
                     NSLog(@"%d %@",i,beacon.uuid);
                     [myBeacons setObject:beacon forKey:[beacon ident]];

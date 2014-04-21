@@ -24,7 +24,7 @@
  * @param trackIn BOOL determining if rssi should be tracked while User is within region
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)majorIn andMinor:(NSInteger)minorIn andTrack:(BOOL)trackIn;{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)majorIn andMinor:(NSInteger)minorIn andTrack:(BOOL)trackIn{
     self = [super init];
     self.ident = identIn;
     self.uuid = uuidIn;
@@ -55,7 +55,7 @@
  * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andTrack:trackIn];
     self.promo = promoIn;
     self.once = onceIn;
@@ -84,7 +84,7 @@
  * @param thresholdIn CGFloat containing threshold for Beacon's within determination
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn andOnce:onceIn];
     self.threshold = thresholdIn;
     
@@ -110,7 +110,7 @@
  * @param mediaIn NSData containing media to be displayed with Promotion
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn andOnce:onceIn];
     self.media = mediaIn;
     
@@ -137,7 +137,7 @@
  * @param mediaIn NSData containing media to be displayed with promotion
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andThreshold:thresholdIn andTrack:trackIn andOnce:onceIn];
     self.media = mediaIn;
     
@@ -239,6 +239,10 @@
  */
 -(void) track:(NSInteger)rssi{
     [[[self.encounters objectAtIndex:0] distArray] addObject:[NSString stringWithFormat:@"%ld", (long)rssi]];
+}
+
+-(void) startManager:(CLLocationManager *)managerIn{
+    [managerIn startMonitoringForRegion:self.region];
 }
 
 

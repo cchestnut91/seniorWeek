@@ -95,5 +95,6 @@
 -(void) enter;
 -(void) exit;
 -(void) track:(NSInteger)rssi;
+-(void) startManager:(CLLocationManager *)managerIn;
 
 @end

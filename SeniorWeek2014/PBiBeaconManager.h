@@ -15,6 +15,6 @@
 @property(atomic, strong)NSMutableDictionary *myBeacons;
 @property(atomic, strong)Beacon *beacon;
 +(PBiBeaconManager *)sharedCenter;
--(id)initWithIdent:(NSString *)app_id;
+-(id)initWithIdent:(NSString *)app_id andManager:(CLLocationManager *)managerIn;
 -(NSMutableDictionary *)beacons;
 @end

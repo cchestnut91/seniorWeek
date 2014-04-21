@@ -50,7 +50,17 @@
     self.promos = [[NSMutableDictionary alloc] init];
     
     //Initialize beacon array from file or create new
-    [self checkForData:[NSNotification new]];
+    //[self checkForData:[[NSNotification alloc] init]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.archivePath]){
+        self.beacons = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithFile:self.archivePath];
+        self.beacons = nil;
+        if (self.beacons == nil){
+            self.beacons = [[NSMutableDictionary alloc] init];
+        }
+    } else {
+        self.beacons = [[NSMutableDictionary alloc] init];
+        NSLog(@"File doesn't exist");
+    }
     
     //Promo Button off by default
     [self.promoButton setEnabled:NO];
@@ -106,10 +116,10 @@
     */
     
     
-    PBiBeaconManager *myiBeaconManager = [[PBiBeaconManager alloc] initWithIdent:@"senior_week"];
+    PBiBeaconManager *myiBeaconManager = [[PBiBeaconManager alloc] initWithIdent:@"senior_week" andManager:self.locationManager];
     _beacons = myiBeaconManager.beacons;
     
-    [self initRegions];
+    //[self initRegions];
 }
 
 - (void)didReceiveMemoryWarning
@@ -290,7 +300,7 @@
  * Precondition: Beacons dictionary is not null \n
  * PostCondition: LocationManager is monitoring all beacons in dictionary \n
  * @return void
- */
+ 
 - (void)initRegions{
     //NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"]; // ORIGINAL
     
@@ -301,7 +311,7 @@
     for (int i = 0; i < beaconsIn.count; i++){
         [self.locationManager startMonitoringForRegion:[(Beacon *)[beaconsIn objectAtIndex:i] region]];
     }
-}
+}*/
 
 /**
  * locationManager: didStartMonitoringForRegion
@@ -367,25 +377,35 @@
         //This should become if (beacon.proximity > [[self.beacons objectForKey:[region identifier]] threshold]), but first Beacons need a default threshold
         if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
             if ([[self.beacons objectForKey:[region identifier]] promo]){
-                if (![self.promoButton isEnabled]){
-                    [self.promoButton setEnabled:YES];
+                [self.promos setObject:[self.beacons objectForKey:[region identifier]] forKey:[region identifier]];
+            }
+            [self checkPromos];
+            if (![[self.beacons objectForKey:[region identifier]] within]){
+                [[self.beacons objectForKey:[region identifier]] setWithin:YES];
+                if (!([[self.beacons objectForKey:[region identifier]] once] && [[self.beacons objectForKey:[region identifier]] found])){
+                    NSDictionary *dataDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[region identifier], nil] forKeys:[NSArray arrayWithObjects:@"ident", nil]];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"found" object:self userInfo:dataDict];
                 }
             }
             if (![[self.beacons objectForKey:[region identifier]] found]){
                 [[self.beacons objectForKey:[region identifier]] setFound:YES];
             }
-            if (![[self.beacons objectForKey:[region identifier]] within]){
-                [[self.beacons objectForKey:[region identifier]] setWithin:YES];
-                NSDictionary *dataDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[region identifier], @"$1 Off Bandwagon Fries", @"There's nothing like an order of Bandwagon fries, so go enjoy some later on today, and display this message for a $1 discount!", nil] forKeys:[NSArray arrayWithObjects:@"ident", @"title", @"message", nil]];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"found" object:self userInfo:dataDict];
-            }
-            if ([[self.beacons objectForKey:[region identifier]] promo]){
-                [self.promos setObject:[self.beacons objectForKey:[region identifier]] forKey:[region identifier]];
-            }
         }
         if ([[self.beacons objectForKey:[region identifier]] track]){
             [[self.beacons objectForKey:[region identifier]] track:beacon.rssi];
+        }
+    }
+}
+
+-(void) checkPromos {
+    if ([self.promos count] == 0){
+        if ([self.promoButton isEnabled]){
+            [self.promoButton setEnabled:NO];
+        }
+    } else {
+        if (![self.promoButton isEnabled]){
+            [self.promoButton setEnabled:YES];
         }
     }
 }
@@ -450,6 +470,7 @@
     [self saveData:note];
     if ([[self.beacons objectForKey:[theData objectForKey:@"ident"]] promo]){
         [self.promos removeObjectForKey:[self.beacons objectForKey:[theData objectForKey:@"ident"]]];
+        [self checkPromos];
     }
 }
 
