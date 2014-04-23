@@ -11,5 +11,6 @@
 
 @interface PromoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIButton *starButton;
 
 @end

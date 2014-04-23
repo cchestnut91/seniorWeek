@@ -11,5 +11,7 @@
 
 @interface PromoTableViewController : UITableViewController
 @property (strong, nonatomic) NSMutableArray *promos;
+@property (strong, nonatomic) NSMutableArray *savedPromos;
+@property (strong, nonatomic) NSString *docPath;
 
 @end

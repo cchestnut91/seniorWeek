@@ -9,6 +9,7 @@
 #import "EventDetailViewController.h"
 #import "PBiBeaconManager.h"
 #import "Beacon.h"
+#import "PromoTableViewController.h"
 
 @interface EventTableViewController ()
 
@@ -27,7 +28,7 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    
+    [self checkPromos];
 }
 
 /**
@@ -44,8 +45,8 @@
     
     //Sets Directory Path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDirectory = [paths objectAtIndex:0];
-    self.archivePath = [docDirectory stringByAppendingPathComponent:@"beaconsArchive.plist"];
+    self.docDirectory = [paths objectAtIndex:0];
+    self.archivePath = [self.docDirectory stringByAppendingPathComponent:@"beaconsArchive.plist"];
     //Initialize dictionary of promotions to populate PromoTableViewController
     self.promos = [[NSMutableDictionary alloc] init];
     
@@ -53,7 +54,7 @@
     //[self checkForData:[[NSNotification alloc] init]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.archivePath]){
         self.beacons = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithFile:self.archivePath];
-        self.beacons = nil;
+        //self.beacons = nil;
         if (self.beacons == nil){
             self.beacons = [[NSMutableDictionary alloc] init];
         }
@@ -63,7 +64,7 @@
     }
     
     //Promo Button off by default
-    [self.promoButton setEnabled:NO];
+    //[self.promoButton setEnabled:NO];
     
     //Initialize LocationManger
     self.locationManager = [[CLLocationManager alloc] init];
@@ -291,6 +292,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if (sender == self.promoButton){
+        [(PromoTableViewController *)[segue destinationViewController] setPromos:[NSMutableArray arrayWithArray:[self.promos allValues]]];
+    }
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
 #pragma mark iBeacons
 
 /**
@@ -376,12 +386,12 @@
         NSLog(@"fired");
         //This should become if (beacon.proximity > [[self.beacons objectForKey:[region identifier]] threshold]), but first Beacons need a default threshold
         if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
-            if ([[self.beacons objectForKey:[region identifier]] promo]){
-                [self.promos setObject:[self.beacons objectForKey:[region identifier]] forKey:[region identifier]];
-            }
-            [self checkPromos];
             if (![[self.beacons objectForKey:[region identifier]] within]){
                 [[self.beacons objectForKey:[region identifier]] setWithin:YES];
+                if ([[self.beacons objectForKey:[region identifier]] promo]){
+                    [self.promos setObject:[self.beacons objectForKey:[region identifier]] forKey:[region identifier]];
+                }
+                [self checkPromos];
                 if (!([[self.beacons objectForKey:[region identifier]] once] && [[self.beacons objectForKey:[region identifier]] found])){
                     NSDictionary *dataDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[region identifier], nil] forKeys:[NSArray arrayWithObjects:@"ident", nil]];
                     
@@ -399,13 +409,27 @@
 }
 
 -(void) checkPromos {
-    if ([self.promos count] == 0){
-        if ([self.promoButton isEnabled]){
-            [self.promoButton setEnabled:NO];
-        }
+    int cnt;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self.docDirectory stringByAppendingPathComponent:@"savedPromos.plist"]]){
+        NSArray *savedPromos = (NSArray *)[NSKeyedUnarchiver unarchiveObjectWithFile:[self.docDirectory stringByAppendingPathComponent:@"savedPromos.plist"]];
+        cnt = savedPromos.count;
     } else {
+        cnt = 0;
+        NSLog(@"File doesn't exist");
+    }
+    if (cnt != 0){
         if (![self.promoButton isEnabled]){
             [self.promoButton setEnabled:YES];
+        }
+    } else {
+        if ([self.promos count] == 0){
+            if ([self.promoButton isEnabled]){
+                [self.promoButton setEnabled:NO];
+            }
+        } else {
+            if (![self.promoButton isEnabled]){
+                [self.promoButton setEnabled:YES];
+            }
         }
     }
 }
@@ -428,10 +452,11 @@
     self.promoView.promoTitle = [theData objectForKey:@"title"];
     self.promoView.promoText = [theData objectForKey:@"message"];
     
+    /*
     if ([[self.navigationController visibleViewController] isEqual:self]){
         [self.navigationController pushViewController:self.promoView animated:YES];
     };
-    
+    */
     [self markTime:theData];
 }
 
@@ -469,7 +494,7 @@
     [[self.beacons objectForKey:[theData objectForKey:@"ident"]] setWithin:NO];
     [self saveData:note];
     if ([[self.beacons objectForKey:[theData objectForKey:@"ident"]] promo]){
-        [self.promos removeObjectForKey:[self.beacons objectForKey:[theData objectForKey:@"ident"]]];
+        [self.promos removeObjectForKey:[theData objectForKey:@"ident"]];
         [self checkPromos];
     }
 }

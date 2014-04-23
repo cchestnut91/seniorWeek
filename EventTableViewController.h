@@ -55,6 +55,7 @@
  * NSString which holds path to plist containing Beacon information stored
  */
 @property (strong, nonatomic) NSString *archivePath;
+@property (strong, nonatomic) NSString *docDirectory;
 
 /**
  * sensor.
