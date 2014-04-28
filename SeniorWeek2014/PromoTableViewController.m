@@ -14,7 +14,9 @@
 
 @end
 
-@implementation PromoTableViewController
+@implementation PromoTableViewController{
+    NSIndexPath *lastPressed;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -89,6 +91,15 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    
+    //[header.textLabel setTextColor:[UIColor colorWithRed:252/255.0 green:185/255.0 blue:34/255.0 alpha:1]];
+    [header.textLabel setTextColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
+    [header.textLabel setTextAlignment:NSTextAlignmentLeft];
+    [header.textLabel setFont:[UIFont systemFontOfSize:17]];
+}
+
 -(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
@@ -99,25 +110,29 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noPromoCell"];
         return cell;
     }
-    PromoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"promoCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    PromoTableViewCell *cell;
     Beacon *promoBeacon;
     
     if (indexPath.section == 0){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"promoCell" forIndexPath:indexPath];
         promoBeacon = [self.promos objectAtIndex:indexPath.row];
     } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"savedPromoCell" forIndexPath:indexPath];
         promoBeacon = [self.savedPromos objectAtIndex:indexPath.row];
     }
     
     [cell.label setText:promoBeacon.title];
     
-    if (indexPath.section == 1){
-        [cell.starButton setImage:[UIImage imageNamed:@"Star_Active"] forState:UIControlStateNormal];
-    }
-    
     return cell;
+}
+
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0){
+        if (self.promos.count == 0){
+            return nil;
+        }
+    }
+    return indexPath;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -130,21 +145,49 @@
         promo = [self.savedPromos objectAtIndex:indexPath.row];
     }
     
-    [detail.promoTitle setText:promo.title];
-    detail.promoText.text = promo.description;
-    detail.promoImage.image = [UIImage imageWithData:promo.media];
+    [detail setPromoTitleText:promo.title];
+    [detail setMessage:promo.message];
+    [detail setImage:[UIImage imageWithData:promo.media]];
     
     [self.navigationController pushViewController:detail animated:YES];
-    /*
+}
+- (IBAction)savePromo:(id)sender {
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    
     if ([self.savedPromos containsObject:[self.promos objectAtIndex:indexPath.row]]){
         UIAlertView *exists = [[UIAlertView alloc] initWithTitle:@"Already Saved" message:@"This promotion has already been saved" delegate:self cancelButtonTitle:@"Oh yeah!" otherButtonTitles:nil, nil];
         [exists show];
     } else {
-        [self.savedPromos addObject:[self.promos objectAtIndex:indexPath.row]];
-        [self saveData];
-        [tableView reloadData];
+        BOOL found = NO;
+        for (int i = 0; i < self.savedPromos.count; i++){
+            if ([[self.savedPromos objectAtIndex:i] isSame:[self.promos objectAtIndex:indexPath.row]]){
+                found = YES;
+            }
+        }
+        if (!found){
+            [self.savedPromos addObject:[self.promos objectAtIndex:indexPath.row]];
+            [self saveData];
+            [self.tableView reloadData];
+        } else {
+            UIAlertView *exists = [[UIAlertView alloc] initWithTitle:@"Already Saved" message:@"This promotion has already been saved" delegate:self cancelButtonTitle:@"Oh yeah!" otherButtonTitles:nil, nil];
+            [exists show];
+        }
     }
-     */
+}
+- (IBAction)removeSaved:(id)sender {
+    UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Remove Promotion" message:@"Are you sure you want to delete this promotion?" delegate:self cancelButtonTitle:@"Nevermind" otherButtonTitles:@"Yes I am", nil];
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    lastPressed = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    [confirm show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != 0){
+        [self.savedPromos removeObjectAtIndex:lastPressed.row];
+        [self.tableView reloadData];
+        [self saveData];
+    }
 }
 
 -(void)saveData{

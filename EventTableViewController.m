@@ -9,13 +9,15 @@
 #import "EventDetailViewController.h"
 #import "PBiBeaconManager.h"
 #import "Beacon.h"
+#import "TimeInBeacon.h"
 #import "PromoTableViewController.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface EventTableViewController ()
 
 @end
 
-@implementation EventTableViewController\
+@implementation EventTableViewController
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -27,8 +29,19 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [self checkPromos];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    //This method should load beacons from JSON object
+}
+
+-(void)barButtonItemPressed:(UIButton *)sender{
+    for (id key in self.promos){
+        [[self.promos objectForKey:key] setSeen:YES];
+    }
+    [self checkPromos];
+    [self performSegueWithIdentifier:@"showPromos" sender:self];
 }
 
 /**
@@ -50,6 +63,15 @@
     //Initialize dictionary of promotions to populate PromoTableViewController
     self.promos = [[NSMutableDictionary alloc] init];
     
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self.docDirectory stringByAppendingPathComponent:@"userID"]]){
+        self.userID = [NSKeyedUnarchiver unarchiveObjectWithFile:[self.docDirectory stringByAppendingPathComponent:@"userID"]];
+    } else {
+        NSError *error = nil;
+        NSString *userID = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://experiencepush.com/beacon_portal/new_anon_user.php"] encoding:NSASCIIStringEncoding error:&error];
+        self.userID = userID;
+        [NSKeyedArchiver archiveRootObject:userID toFile:[self.docDirectory stringByAppendingPathComponent:@"userID"]];
+    }
+    
     //Initialize beacon array from file or create new
     //[self checkForData:[[NSNotification alloc] init]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.archivePath]){
@@ -65,12 +87,23 @@
     
     //Promo Button off by default
     //[self.promoButton setEnabled:NO];
+    self.promoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 63, 20)];
+    // Add your action to your button
+    [self.promoButton addTarget:self action:@selector(barButtonItemPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.promoButton setTitle:@"Promos" forState:UIControlStateNormal];
+    [self.promoButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [self.promoButton setTitleColor:[UIColor colorWithRed:(252/255.0) green:(185/255.0) blue:(34/255.0) alpha:1] forState:UIControlStateNormal];
+    //[self.promoButton setTitleColor:[[[[UIApplication sharedApplication] delegate] window] tintColor] forState:UIControlStateNormal];
+    [self.promoButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [self.promoButton setTitleColor:[self.tableView tintColor] forState:UIControlStateHighlighted];
+    BBBadgeBarButtonItem *right = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:self.promoButton];
+    right.badgeOriginX = 58;
+    [self.navigationItem setRightBarButtonItem:right];
     
     //Initialize LocationManger
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
-    //This method should load beacons from JSON object
     [self loadBeacons];
     
     //Not sure what this block does
@@ -118,7 +151,34 @@
     
     
     PBiBeaconManager *myiBeaconManager = [[PBiBeaconManager alloc] initWithIdent:@"senior_week" andManager:self.locationManager];
-    _beacons = myiBeaconManager.beacons;
+    if (self.beacons == nil){
+        self.beacons = myiBeaconManager.beacons;
+    } else {
+        NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+        for (id key in myiBeaconManager.beacons){
+            if ([self.beacons objectForKey:key] != nil){
+                Beacon *old = [self.beacons objectForKey:key];
+                if ([old isSame:[myiBeaconManager.beacons objectForKey:key]]){
+                    [[myiBeaconManager.beacons objectForKey:key] setEncounters:[[self.beacons objectForKey:key] encounters]];
+                    [[myiBeaconManager.beacons objectForKey:key] setSeen:[[self.beacons objectForKey:key] seen]];
+                    [temp setObject:[myiBeaconManager.beacons objectForKey:key] forKey:key];
+                } else {
+                    [temp setObject:old forKey:[NSString stringWithFormat:@"%@Old", [old ident]]];
+                    [temp setObject:[myiBeaconManager.beacons objectForKey:key] forKey:key];
+                }
+            } else {
+                [temp setObject:[myiBeaconManager.beacons objectForKey:key] forKey:key];
+            }
+        }
+        for (id key in self.beacons){
+            if ([temp objectForKey:key] == nil){
+                [temp setObject:[self.beacons objectForKey:key] forKey:key];
+            }
+        }
+        self.beacons = temp;
+    }
+    
+
     
     //[self initRegions];
 }
@@ -294,7 +354,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (sender == self.promoButton){
+    if ([segue.destinationViewController isKindOfClass:[PromoTableViewController class]]){
         [(PromoTableViewController *)[segue destinationViewController] setPromos:[NSMutableArray arrayWithArray:[self.promos allValues]]];
     }
     // Get the new view controller using [segue destinationViewController].
@@ -388,6 +448,7 @@
         if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
             if (![[self.beacons objectForKey:[region identifier]] within]){
                 [[self.beacons objectForKey:[region identifier]] setWithin:YES];
+                [self markTime:[region identifier]];
                 if ([[self.beacons objectForKey:[region identifier]] promo]){
                     [self.promos setObject:[self.beacons objectForKey:[region identifier]] forKey:[region identifier]];
                 }
@@ -403,7 +464,7 @@
             }
         }
         if ([[self.beacons objectForKey:[region identifier]] track]){
-            [[self.beacons objectForKey:[region identifier]] track:beacon.rssi];
+            [[self.beacons objectForKey:[region identifier]] range:beacon.rssi];
         }
     }
 }
@@ -412,7 +473,7 @@
     int cnt;
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self.docDirectory stringByAppendingPathComponent:@"savedPromos.plist"]]){
         NSArray *savedPromos = (NSArray *)[NSKeyedUnarchiver unarchiveObjectWithFile:[self.docDirectory stringByAppendingPathComponent:@"savedPromos.plist"]];
-        cnt = savedPromos.count;
+        cnt = (int)savedPromos.count;
     } else {
         cnt = 0;
         NSLog(@"File doesn't exist");
@@ -432,6 +493,20 @@
             }
         }
     }
+    cnt = 0;
+    for (id key in self.promos){
+        if (![[self.beacons objectForKey:key] seen]){
+            cnt++;
+        }
+    }
+    if (cnt > 0){
+        [[self.navigationItem.rightBarButtonItems objectAtIndex:0] setBadgeValue:[NSString stringWithFormat:@"%d", cnt]];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(NSInteger)cnt];
+    } else {
+        [[self.navigationItem.rightBarButtonItems objectAtIndex:0] setBadgeValue:[NSString stringWithFormat:@"%d", 0]];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(NSInteger)cnt];
+    }
+    
 }
 
 /**
@@ -445,19 +520,13 @@
  */
 - (void)found: (NSNotification *)note {
     NSDictionary *theData = [note userInfo];
-    
-    self.promoView = (PromoViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"promoVC"];
-    //self.promoView = [[PromoViewController alloc] init];
-    self.promoView.promoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandwagon"]];
-    self.promoView.promoTitle = [theData objectForKey:@"title"];
-    self.promoView.promoText = [theData objectForKey:@"message"];
-    
-    /*
-    if ([[self.navigationController visibleViewController] isEqual:self]){
-        [self.navigationController pushViewController:self.promoView animated:YES];
-    };
-    */
-    [self markTime:theData];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = [NSString stringWithFormat:@"%@", [[self.beacons objectForKey:[theData objectForKey:@"ident"]] title]];
+    notification.alertAction = @"save";
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:0.02];
+    if (![notification.alertBody isEqualToString:@"(null)"]){
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 /**
@@ -469,8 +538,8 @@
  * @param theData NSDictionary containing information about the Beacon
  * @return void
  */
--(void)markTime:(NSDictionary *)theData {
-    [[self.beacons objectForKey:[theData objectForKey:@"ident"]] enter];
+-(void)markTime:(NSString *)ident {
+    [[self.beacons objectForKey:ident] markEnter];
     
     /*
     UIAlertView *count = [[UIAlertView alloc] initWithTitle:@"Count" message:[NSString stringWithFormat:@"%lu", (unsigned long)[[[self.beacons objectForKey:[theData objectForKey:@"ident"]] encounters] count]] delegate:self cancelButtonTitle:@"Great!" otherButtonTitles:nil, nil];
@@ -490,13 +559,13 @@
 -(void) lost: (NSNotification *)note{
     NSDictionary *theData = [note userInfo];
     
-    [[self.beacons objectForKey:[theData objectForKey:@"ident"]] exit];
+    [[self.beacons objectForKey:[theData objectForKey:@"ident"]] markExit];
     [[self.beacons objectForKey:[theData objectForKey:@"ident"]] setWithin:NO];
     [self saveData:note];
     if ([[self.beacons objectForKey:[theData objectForKey:@"ident"]] promo]){
         [self.promos removeObjectForKey:[theData objectForKey:@"ident"]];
-        [self checkPromos];
     }
+    [self checkPromos];
 }
 
 /**
@@ -512,7 +581,7 @@
     //Initialize beacon array from file or create new
     if ([[NSFileManager defaultManager] fileExistsAtPath:self.archivePath]){
         self.beacons = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithFile:self.archivePath];
-        self.beacons = nil;
+        //self.beacons = nil;
         if (self.beacons == nil){
             self.beacons = [[NSMutableDictionary alloc] init];
         }
@@ -520,6 +589,37 @@
         self.beacons = [[NSMutableDictionary alloc] init];
         NSLog(@"File doesn't exist");
     }
+    [self loadBeacons];
+}
+
+-(void)uploadData {
+    NSString *data = [NSString stringWithFormat:@"B:%@", self.userID];
+    for (id key in self.beacons){
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        
+        [formatter setDateFormat:@"MM-dd-yyyyHH:mm"];
+        data = [data stringByAppendingString:[NSString stringWithFormat:@"%@~", [(Beacon *)[self.beacons objectForKey:key] ident]]];
+        for (int i = 0; i < [(Beacon *)[self.beacons objectForKey:key] encounters].count; i++){
+            TimeInBeacon *time = [[[self.beacons objectForKey:key] encounters] objectAtIndex:i];
+            if (time.exit != nil){
+                data = [data stringByAppendingString:[NSString stringWithFormat:@"%@*%@:", [formatter stringFromDate:time.enter], [formatter stringFromDate:time.exit]]];
+                for (int j = 0; j < time.distArray.count; j++){
+                    data = [data stringByAppendingString:[NSString stringWithFormat:@"%@^", [time.distArray objectAtIndex:j]]];
+                }
+                data = [data stringByAppendingString:@"-"];
+            }
+        }
+        data = [data stringByAppendingString:@","];
+    }
+    data = [data stringByAppendingString:@"."];
+    NSLog(@"%@", data);
+    NSString *url = [NSString stringWithFormat:@"http://www.experiencepush.com/beacon_portal/upload.php?id=%@&data=%@", self.userID, data];
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
+    NSError *error = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
 }
 
 /**
@@ -533,6 +633,7 @@
  */
 -(void)saveData: (NSNotification *)note{
     [NSKeyedArchiver archiveRootObject:self.beacons toFile:self.archivePath];
+    [self uploadData];
 }
 
 @end

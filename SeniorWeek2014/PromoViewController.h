@@ -11,6 +11,9 @@
 @interface PromoViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *promoImage;
 @property (strong, nonatomic) IBOutlet UILabel *promoTitle;
+@property (strong, nonatomic) NSString *promoTitleText;
+@property (strong, nonatomic) NSString *message;
+@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) IBOutlet UITextView *promoText;
 
 @end

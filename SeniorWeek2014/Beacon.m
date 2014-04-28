@@ -31,6 +31,7 @@
     self.major = majorIn;
     self.minor = minorIn;
     self.track = trackIn;
+    self.seen = NO;
     self.region = [[CLBeaconRegion alloc] initWithProximityUUID:self.uuid major:(CLBeaconMinorValue)self.major minor:(CLBeaconMinorValue)self.minor identifier:self.ident];
     self.encounters = [[NSMutableArray alloc] init];
     
@@ -144,6 +145,14 @@
     return self;
 }
 
+-(BOOL) isSame:(Beacon *)beaconIn {
+    BOOL ret = NO;
+    if ([self.ident isEqualToString:beaconIn.ident] && [self.message isEqualToString:beaconIn.message] && [self.title isEqualToString:beaconIn.title] && self.major == beaconIn.major && self.minor == beaconIn.minor && [self.uuid.UUIDString isEqualToString:beaconIn.uuid.UUIDString] && self.promo == beaconIn.promo){
+        ret = YES;
+    }
+    return ret;
+}
+
 /**
  * encodeWithCoder.
  * Description: Allows Object and properties to be saved as NSData \n
@@ -160,6 +169,7 @@
     [aCoder encodeBool:self.within forKey:@"within"];
     [aCoder encodeBool:self.found forKey:@"found"];
     [aCoder encodeBool:self.track forKey:@"track"];
+    [aCoder encodeBool:self.seen forKey:@"seen"];
     [aCoder encodeObject:self.encounters forKey:@"encounters"];
     [aCoder encodeObject:self.title forKey:@"title"];
     [aCoder encodeObject:self.message forKey:@"message"];
@@ -186,6 +196,7 @@
     self.ident = [aDecoder decodeObjectForKey:@"ident"];
     self.encounters = [aDecoder decodeObjectForKey:@"encounters"];
     self.promo = [aDecoder decodeBoolForKey:@"promo"];
+    self.seen = [aDecoder decodeBoolForKey:@"seen"];
     self.found = [aDecoder decodeBoolForKey:@"found"];
     self.within = [aDecoder decodeBoolForKey:@"within"];
     self.track = [aDecoder decodeBoolForKey:@"track"];
@@ -210,7 +221,7 @@
  * @author Calvin Chestnut
  * @return void
  */
--(void)enter{
+-(void)markEnter{
     [self.encounters insertObject:[[TimeInBeacon alloc] init] atIndex:0];
 }
 
@@ -223,7 +234,7 @@
  * @author Calvin Chestnut
  * @return void
  */
--(void)exit{
+-(void)markExit{
     [[self.encounters objectAtIndex:0] setExit:[[NSDate alloc] init]];
 }
 
@@ -237,7 +248,7 @@
  * @param rssi NSInteger containing rssi from Beacon to device
  * @return void
  */
--(void) track:(NSInteger)rssi{
+-(void) range:(NSInteger)rssi{
     [[[self.encounters objectAtIndex:0] distArray] addObject:[NSString stringWithFormat:@"%ld", (long)rssi]];
 }
 

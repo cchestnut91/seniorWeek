@@ -27,6 +27,11 @@
 		3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24FF3318EF16ED004A3DBC /* SerialGATT.m */; };
 		3E24FF3718EF22FC004A3DBC /* PromoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E24FF3618EF22FC004A3DBC /* PromoViewController.m */; };
 		3E24FF3918EF2492004A3DBC /* bandwagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E24FF3818EF2492004A3DBC /* bandwagon.png */; };
+		3E2C50DB190A989B00580F5F /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2C50DA190A989B00580F5F /* CustomBadge.m */; };
+		3E2C50DE190AF16D00580F5F /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2C50DD190AF16D00580F5F /* BBBadgeBarButtonItem.m */; };
+		3E2C50E1190D973500580F5F /* launchLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C50DF190D973500580F5F /* launchLarge.png */; };
+		3E2C50E2190D973500580F5F /* launchSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C50E0190D973500580F5F /* launchSmall.png */; };
+		3E2C50E4190DA46D00580F5F /* gradBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C50E3190DA46D00580F5F /* gradBar.png */; };
 		3E36D35518E4E19900FE01C3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35418E4E19900FE01C3 /* MapKit.framework */; };
 		3E36D35718E5CCA900FE01C3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E36D35618E5CCA900FE01C3 /* AddressBook.framework */; };
 		3E3CE94618FD628C001FB0D1 /* Beacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3CE94518FD628C001FB0D1 /* Beacon.m */; };
@@ -106,6 +111,13 @@
 		3E24FF3518EF22FC004A3DBC /* PromoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoViewController.h; sourceTree = "<group>"; };
 		3E24FF3618EF22FC004A3DBC /* PromoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromoViewController.m; sourceTree = "<group>"; };
 		3E24FF3818EF2492004A3DBC /* bandwagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bandwagon.png; sourceTree = "<group>"; };
+		3E2C50D9190A989B00580F5F /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		3E2C50DA190A989B00580F5F /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
+		3E2C50DC190AF16D00580F5F /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
+		3E2C50DD190AF16D00580F5F /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
+		3E2C50DF190D973500580F5F /* launchLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchLarge.png; sourceTree = "<group>"; };
+		3E2C50E0190D973500580F5F /* launchSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchSmall.png; sourceTree = "<group>"; };
+		3E2C50E3190DA46D00580F5F /* gradBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradBar.png; sourceTree = "<group>"; };
 		3E36D35418E4E19900FE01C3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3E36D35618E5CCA900FE01C3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3E3CE94418FD628C001FB0D1 /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
@@ -233,6 +245,10 @@
 				3E8DBEC518E06D55001C0658 /* AppDelegate.h */,
 				3E8DBEC618E06D55001C0658 /* AppDelegate.m */,
 				3E8DBEC818E06D55001C0658 /* Main.storyboard */,
+				3E2C50D9190A989B00580F5F /* CustomBadge.h */,
+				3E2C50DA190A989B00580F5F /* CustomBadge.m */,
+				3E2C50DC190AF16D00580F5F /* BBBadgeBarButtonItem.h */,
+				3E2C50DD190AF16D00580F5F /* BBBadgeBarButtonItem.m */,
 				3EA910961903757100133B45 /* PromoTableViewCell.h */,
 				3EA910971903757100133B45 /* PromoTableViewCell.m */,
 				3EA910991903FE1A00133B45 /* PromoTableViewController.h */,
@@ -268,6 +284,7 @@
 				3E8DBEEE18E09E2F001C0658 /* Event.h */,
 				3E8DBEEF18E09E2F001C0658 /* Event.m */,
 				3E8DBECE18E06D55001C0658 /* Images.xcassets */,
+				3E2C50E3190DA46D00580F5F /* gradBar.png */,
 				3E24FF3818EF2492004A3DBC /* bandwagon.png */,
 				3E05FEC918EDD5AD00B553ED /* Bus_Active.png */,
 				3E05FECA18EDD5AD00B553ED /* Bus_Inactive.png */,
@@ -292,6 +309,8 @@
 				FEDFF07918EA440F00C46A9A /* SeniorWeek6.png */,
 				FEDFF07A18EA440F00C46A9A /* SeniorWeek7.png */,
 				3EBB9D5118E1CB6A005F4139 /* commonsImgA.png */,
+				3E2C50DF190D973500580F5F /* launchLarge.png */,
+				3E2C50E0190D973500580F5F /* launchSmall.png */,
 				3EBB9D5218E1CB6A005F4139 /* drinksOnLakeImgA.png */,
 				3EBB9D5318E1CB6A005F4139 /* fireworksImgA.png */,
 				3EBB9D5518E1CB6A005F4139 /* launchConcertImgA.png */,
@@ -379,6 +398,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Calvin Chestnut";
 				TargetAttributes = {
+					3E8DBEB218E06D54001C0658 = {
+						DevelopmentTeam = VDWJ8UMBJ6;
+					};
 					3E8DBED318E06D55001C0658 = {
 						TestTargetID = 3E8DBEB218E06D54001C0658;
 					};
@@ -410,6 +432,7 @@
 			files = (
 				3E8DBECF18E06D55001C0658 /* Images.xcassets in Resources */,
 				3EBB9D5A18E1CB6A005F4139 /* fireworksImgA.png in Resources */,
+				3E2C50E1190D973500580F5F /* launchLarge.png in Resources */,
 				3E8DBEC118E06D55001C0658 /* InfoPlist.strings in Resources */,
 				3E05FE7718ECD4D700B553ED /* launch3.png in Resources */,
 				3E05FE6F18ECBAF200B553ED /* 2k14@58.png in Resources */,
@@ -428,12 +451,14 @@
 				3E05FED818EDD5AD00B553ED /* Star_Inactive.png in Resources */,
 				FE65DAAA18EB63BC00E77A85 /* SeniorWeek3.jpg in Resources */,
 				3E05FE7818ECD4D700B553ED /* launch4.png in Resources */,
+				3E2C50E4190DA46D00580F5F /* gradBar.png in Resources */,
 				FEDFF07C18EA440F00C46A9A /* SeniorWeek2.png in Resources */,
 				3E05FED318EDD5AD00B553ED /* Drinks_Active.png in Resources */,
 				3E05FE6A18EC823C00B553ED /* launchSm.png in Resources */,
 				FEDFF07E18EA440F00C46A9A /* SeniorWeek4.png in Resources */,
 				3EBB9D5C18E1CB6A005F4139 /* launchConcertImgA.png in Resources */,
 				3E05FE6C18EC99A300B553ED /* 2k14 icon.png in Resources */,
+				3E2C50E2190D973500580F5F /* launchSmall.png in Resources */,
 				3E05FED218EDD5AD00B553ED /* Bus_Inactive.png in Resources */,
 				FEDFF07B18EA440F00C46A9A /* SeniorWeek1.jpg in Resources */,
 				3E05FE7018ECBAF200B553ED /* 2k14@80.png in Resources */,
@@ -461,6 +486,7 @@
 			files = (
 				3E24FF3718EF22FC004A3DBC /* PromoViewController.m in Sources */,
 				3E8DBEC718E06D55001C0658 /* AppDelegate.m in Sources */,
+				3E2C50DE190AF16D00580F5F /* BBBadgeBarButtonItem.m in Sources */,
 				3EBB9D6118E1F9B2005F4139 /* EventList.m in Sources */,
 				3E8DBEFB18E0BFFA001C0658 /* SharedEventList.m in Sources */,
 				3EBB9D5018E1AF77005F4139 /* EventDetailViewController.m in Sources */,
@@ -473,6 +499,7 @@
 				3E8DBEF618E0A1C9001C0658 /* EventNavigationViewController.m in Sources */,
 				3E8DBEED18E09BB4001C0658 /* Location.m in Sources */,
 				3EA910981903757100133B45 /* PromoTableViewCell.m in Sources */,
+				3E2C50DB190A989B00580F5F /* CustomBadge.m in Sources */,
 				3E3CE94618FD628C001FB0D1 /* Beacon.m in Sources */,
 				3E8DBEC318E06D55001C0658 /* main.m in Sources */,
 				3E24FF3418EF16ED004A3DBC /* SerialGATT.m in Sources */,
@@ -602,6 +629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SeniorWeek2014/SeniorWeek2014-Prefix.pch";
 				INFOPLIST_FILE = "SeniorWeek2014/SeniorWeek2014-Info.plist";
@@ -616,6 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SeniorWeek2014/SeniorWeek2014-Prefix.pch";
 				INFOPLIST_FILE = "SeniorWeek2014/SeniorWeek2014-Info.plist";

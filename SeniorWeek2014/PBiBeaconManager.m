@@ -52,8 +52,17 @@ static PBiBeaconManager *sharedPBiBeaconManager = nil;
             int i=0;
             for ( NSDictionary *serialData in data )
             {
-                if ([serialData[@"cur_app_id"] isEqual:app_id]) {   //&&[serialData[@"method_id"]isEqual:@"FOUNDER"]
-                    beacon = [[Beacon alloc] initWithIdent:[NSString stringWithFormat:@"%@", serialData[@"ident"]] andUUID:[[NSUUID alloc] initWithUUIDString:[NSString stringWithFormat:@"%@", serialData[@"UUID"]]] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:YES andTitle:[NSString stringWithFormat:@"%@", serialData[@"beacon_message"]] andMessage:[NSString stringWithFormat:@"%@", serialData[@"beacon_message_meta"]] andTrack:NO andOnce:NO];
+                if ([serialData[@"cur_app_id"] isEqual:app_id]) {
+                    BOOL promo = NO;
+                    NSData *imgData;
+                    if ([serialData[@"method_id"] isEqualToString:@"promo"]){
+                        promo = YES;
+                    }
+                    beacon = [[Beacon alloc] initWithIdent:[NSString stringWithFormat:@"%@", serialData[@"ident"]] andUUID:[[NSUUID alloc] initWithUUIDString:[NSString stringWithFormat:@"%@", serialData[@"UUID"]]] andMajor:(NSInteger)1 andMinor:(NSInteger)1 andPromo:promo andTitle:[NSString stringWithFormat:@"%@", serialData[@"beacon_message"]] andMessage:[NSString stringWithFormat:@"%@", serialData[@"beacon_message_meta"]] andTrack:[serialData[@"track"] boolValue] andOnce:[serialData[@"andOnce"] boolValue]];
+                    if (![serialData[@"img_ref"] isKindOfClass:[NSNull class]]){
+                        imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:serialData[@"img_ref"]]];
+                        [beacon setMedia:imgData];
+                    }
                     [beacon startManager:managerIn];
 
                     NSLog(@"%d %@",i,beacon.uuid);

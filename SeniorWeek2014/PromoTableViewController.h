@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Beacon.h"
 
-@interface PromoTableViewController : UITableViewController
+@interface PromoTableViewController : UITableViewController <UIAlertViewDelegate>
 @property (strong, nonatomic) NSMutableArray *promos;
 @property (strong, nonatomic) NSMutableArray *savedPromos;
 @property (strong, nonatomic) NSString *docPath;

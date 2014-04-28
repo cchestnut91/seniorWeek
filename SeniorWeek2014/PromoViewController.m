@@ -26,14 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //Get rid of this and fix the bug!
-    /*
-    [_promoImage setImage:[UIImage imageNamed:@"bandwagon"]];   
-    [_promoText setText:@"There's nothing like an order of Bandwagon fries, so go enjoy some later on today and display this message for a $1 discount!"];
-    [_promoText setTextAlignment:NSTextAlignmentLeft];
-    [_promoTitle setText:@"Enjoy some Bandwagon Fries"];
-    */
-    // Do any additional setup after loading the view.
+    
+    [self.promoImage setImage:self.image];
+    [self.promoText setText:self.message];
+    [self.promoTitle setText:self.promoTitleText];
+    [self.promoText setTextColor:[UIColor colorWithRed:(252/255.0) green:(185/255.0) blue:(34/255.0) alpha:1]];
 }
 
 - (void)didReceiveMemoryWarning

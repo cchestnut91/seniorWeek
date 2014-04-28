@@ -20,6 +20,8 @@
     NSMutableDictionary *beaconDict;
 };
 
+@property UIActivityIndicatorView *spinner;
+
 /**
  * promoView.
  * PromoViewController which displays information about specific promotion
@@ -34,7 +36,7 @@
  * promoButton.
  * Promos button which shows all available promotions
  */
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *promoButton;
+@property (strong, nonatomic) IBOutlet UIButton *promoButton;
 /**
  * locationManager.
  * CLLocationManager which acts as default location manager
@@ -56,6 +58,7 @@
  */
 @property (strong, nonatomic) NSString *archivePath;
 @property (strong, nonatomic) NSString *docDirectory;
+@property (strong, nonatomic) NSString *userID;
 
 /**
  * sensor.

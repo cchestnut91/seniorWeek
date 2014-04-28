@@ -87,14 +87,17 @@
  */
 @property BOOL track;
 
+@property BOOL seen;
+
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andTrack:(BOOL)trackIn;
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;
 -(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn;
--(void) enter;
--(void) exit;
--(void) track:(NSInteger)rssi;
+-(BOOL) isSame: (Beacon *)beaconIn;
+-(void) markEnter;
+-(void) markExit;
+-(void) range:(NSInteger)rssi;
 -(void) startManager:(CLLocationManager *)managerIn;
 
 @end
