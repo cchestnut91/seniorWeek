@@ -82,10 +82,10 @@
  * @param titleIn NSString containing promotion title
  * @param messageIn NSString containing promotion message
  * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
- * @param thresholdIn CGFloat containing threshold for Beacon's within determination
+ * @param thresholdIn int containing threshold for Beacon's within determination
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(int)thresholdIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andTrack:trackIn andOnce:onceIn];
     self.threshold = thresholdIn;
     
@@ -134,11 +134,11 @@
  * @param titleIn NSString containing promotion title
  * @param messageIn NSString containing promotion message
  * @param onceIn BOOL determines if promotion should be displayed everytime it is encountered or only the first time
- * @param thresholdIn CGFloat containing threshold for Beacon's within determination
+ * @param thresholdIn int containing threshold for Beacon's within determination
  * @param mediaIn NSData containing media to be displayed with promotion
  * @return New Beacon object
  */
--(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(CGFloat)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
+-(id) initWithIdent:(NSString *)identIn andUUID:(NSUUID *)uuidIn andMajor:(NSInteger)major andMinor:(NSInteger)minorIn andPromo:(BOOL)promoIn andTitle:(NSString *)titleIn andMessage:(NSString *)messageIn andThreshold:(int)thresholdIn andMedia:(NSData *)mediaIn andTrack:(BOOL)trackIn andOnce:(BOOL)onceIn{
     self = [self initWithIdent:identIn andUUID:uuidIn andMajor:major andMinor:minorIn andPromo:promoIn andTitle:titleIn andMessage:messageIn andThreshold:thresholdIn andTrack:trackIn andOnce:onceIn];
     self.media = mediaIn;
     

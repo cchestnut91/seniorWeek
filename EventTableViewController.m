@@ -445,7 +445,8 @@
         
         NSLog(@"fired");
         //This should become if (beacon.proximity > [[self.beacons objectForKey:[region identifier]] threshold]), but first Beacons need a default threshold
-        if (beacon.proximity == CLProximityImmediate || beacon.proximity == CLProximityNear){
+        NSLog(@"%ld", (long)beacon.rssi);
+        if (beacon.rssi >= [[self.beacons objectForKey:[region identifier]] threshold]){
             if (![[self.beacons objectForKey:[region identifier]] within]){
                 [[self.beacons objectForKey:[region identifier]] setWithin:YES];
                 [self markTime:[region identifier]];

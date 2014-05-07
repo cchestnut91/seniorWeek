@@ -63,6 +63,12 @@ static PBiBeaconManager *sharedPBiBeaconManager = nil;
                         imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:serialData[@"img_ref"]]];
                         [beacon setMedia:imgData];
                     }
+                    if (![serialData[@"beacon_range"] isKindOfClass:[NSNull class]]){
+                        int threshold = [serialData[@"beacon_range"] intValue];
+                        [beacon setThreshold:threshold * -1];
+                    } else {
+                        [beacon setThreshold:50];
+                    }
                     [beacon startManager:managerIn];
 
                     NSLog(@"%d %@",i,beacon.uuid);
